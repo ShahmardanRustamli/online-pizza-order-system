@@ -4,7 +4,7 @@ public enum Orders {
     ITALIANO("Italiano Pizza",6.99),
     AMERICANO("Americano Pizza", 9.99),
     MEXICAN("Mexican Chili Pizza", 12.99),
-    CHICKEN_KICKERS("Chicke Pizza", 7.99),
+    CHICKEN_KICKERS("Chicken Pizza", 7.99),
     MARGHERITA("Margherita Pizza",16.99);
 
     private final String name;

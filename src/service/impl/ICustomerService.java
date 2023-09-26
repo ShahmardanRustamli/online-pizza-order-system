@@ -16,6 +16,7 @@ import static data.GlobalData.customerList;
 import static helper.Helper.fillCustomer;
 
 public class ICustomerService implements CustomerService {
+    PizzaOrder order = new PizzaOrder();
     @Override
     public GeneralResponse<List<Customer>> customerRegister() {
         System.out.println("----------| CUSTOMER REGISTER | ----------");
@@ -47,39 +48,46 @@ public class ICustomerService implements CustomerService {
 
     @Override
     public GeneralResponse<List<Customer>> placeOrder() {
-        PizzaOrder order = new PizzaOrder();
+        double total =0;
         while (true){
             System.out.println("Available Pizzas:");
             for (int i = 0; i < Orders.values().length; i++) {
                 System.out.println(i+1+". "+ Orders.values()[i].getName()+ ". "+ Orders.values()[i].getPrice());
             }
-            System.out.println("0. Checkout and Exit ");
+            System.out.println("0. CHECKOUT AND FINISH ORDER");
             byte choice = InputUtil.getInstance().inputByte("Enter Number To Order Pizza:");
             if (choice == 0){
+                Customer customer = customerList.get(0);
+                customer.decreaseBalance(total);
                 System.out.println("Thank you for your order!");
+                System.out.println("Your Current Balance: "+customer.getMoneyAccount() + " $");
                 break;
             } else if (choice>= 1 && choice<=Orders.values().length) {
                 Orders orders = Orders.values()[choice-1];
                 order.addPizza(orders);
+                total = order.calculateTotal();
+                System.out.println("Total: $"+ total);
                 System.out.println("Added " + orders.getName() + " to your order");
 
             }else {
                 System.out.println(ExceptionEnum.INVALID_CHOICE_EXCEPTION);
             }
         }
-        System.out.println("Your Order");
+        System.out.println("Your Order: ");
         for (Orders orders : order.getPizzas()){
             System.out.println(orders.getName()+ " - $"+orders.getPrice());
         }
-
-        double total = order.calculateTotal();
-        System.out.println("Total: $"+ total);
         return new GeneralResponse<List<Customer>>().of("Order Successfully!");
     }
 
     @Override
     public GeneralResponse<List<Customer>> trackOrder() {
-        return null;
+        System.out.println("----------------| YOUR ORDERS |---------------- ");
+        for (Orders orders : order.getPizzas()){
+            System.out.println(orders.getName()+ " - $"+orders.getPrice());
+        }
+        return new GeneralResponse<List<Customer>>().of("Orders Showed!");
+
     }
 
     @Override

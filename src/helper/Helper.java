@@ -18,8 +18,10 @@ public class Helper {
             String eMail = InputUtil.getInstance().inputString("Enter The e-mail Address:");
             String password = InputUtil.getInstance().inputString("Enter The Password:");
             LocalDateTime localDateTime = LocalDateTime.now();
+            double moneyAccount = 100;
+
             boolean status = true;
-            return new Customer(++id,name,surname,phoneNumber,eMail,password,localDateTime.now(),status);
+            return new Customer(++id,name,surname,phoneNumber,eMail,password,moneyAccount,localDateTime.now(),status);
         }catch (ApplicationException exception){
             throw new ApplicationException(ExceptionEnum.UNSUCCESSFULLY_REGISTER);
         }
@@ -38,4 +40,9 @@ public class Helper {
         }
 
     }
+//    public static Customer decreaseMoney(){
+//        Customer customer;
+//        int leftBalance = customer.getMoneyAccount()-
+//        return null;
+//    }
 }

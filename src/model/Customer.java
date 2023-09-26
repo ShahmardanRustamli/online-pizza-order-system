@@ -14,14 +14,14 @@ public class Customer {
     private LocalDateTime registrationDate;
     private boolean status;
 
-    public Customer(long customerId, String name, String surname, String phoneNumber, String eMail, String password, LocalDateTime registrationDate, boolean status) {
+    public Customer(long customerId, String name, String surname, String phoneNumber, String eMail, String password,double moneyAccount, LocalDateTime registrationDate, boolean status) {
         this.customerId = customerId;
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.email = eMail;
         this.password = password;
-        this.moneyAccount = 100;
+        this.moneyAccount = moneyAccount;
         this.registrationDate = registrationDate;
         this.status = status;
     }
@@ -120,5 +120,11 @@ public class Customer {
                 ", registrationDate=" + registrationDate +
                 ", status=" + status +
                 '}';
+    }
+    public Double decreaseBalance(double amount){
+        if (amount>0 && moneyAccount>=amount){
+            moneyAccount-=amount;
+        }
+        return moneyAccount;
     }
 }

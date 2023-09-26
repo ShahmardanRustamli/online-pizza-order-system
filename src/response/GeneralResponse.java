@@ -18,13 +18,13 @@ public class GeneralResponse<T> {
 
     public GeneralResponse<T> of(String message, T data) {
         LocalDateTime nowData = LocalDateTime.now();
-        System.out.println(message+nowData);
+        System.out.println(message+nowData.withNano(0));
         return build(message, nowDate, data);
 
     }
     public GeneralResponse<T> of(String message) {
         LocalDateTime nowData = LocalDateTime.now();
-        System.out.println(message+nowData);
+        System.out.println(message+nowData.withNano(0));
         return build(message, nowDate, data);
 
     }

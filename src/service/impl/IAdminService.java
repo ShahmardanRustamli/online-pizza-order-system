@@ -26,18 +26,17 @@ public class IAdminService implements AdminService {
         final byte MAX_ATTEMPTS = 3;
         byte attempt = 0;
         byte last_attempts = 3;
+        System.out.println("------------| ADMIN LOGIN |-----------");
         while (attempt<MAX_ATTEMPTS){
             String username = InputUtil.getInstance().inputString("Enter Admin Username:");
             String password = InputUtil.getInstance().inputString("Enter Admin Password:");
-            System.out.println("------------| ADMIN LOGIN |-----------");
             if (username.equals(ADMIN_USERNAME) && password.equals(ADMIN_PASS)) {
                 return true;
 
             } else {
                 System.err.println(ExceptionEnum.INVALID_LOGIN);
                 System.out.println("Incorrect Password, Please Try Again!\n" +
-                        "Your attempts: ");
-                System.out.println(--last_attempts);
+                        "Your attempts: " + --last_attempts);
                 attempt++;
             }
             if (attempt == MAX_ATTEMPTS){
@@ -78,11 +77,11 @@ public class IAdminService implements AdminService {
 
     @Override
     public GeneralResponse<List<Customer>> viewCustomers() {
-        if (GlobalData.customerList == null){
-            System.out.println("There Are No Customers!: Customer List Is Empty!");
-        }
         for (Customer customer : GlobalData.customerList){
             System.out.println(customer);
+            if (GlobalData.customerList == null){
+                System.out.println("There Are No Customers!: Customer List Is Empty!");
+            }
         }
         return new GeneralResponse<List<Customer>>().of("Customer(s) Showed Successfully!");
 

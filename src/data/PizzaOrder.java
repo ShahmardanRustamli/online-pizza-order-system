@@ -15,6 +15,7 @@ public class PizzaOrder {
         double total = 0;
         for (int i = 0; i < pizzas.size(); i++) {
             Orders orders = pizzas.get(i);
+            total+=orders.getPrice();
         }
         return total;
     }

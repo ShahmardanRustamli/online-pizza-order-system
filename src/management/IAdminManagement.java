@@ -40,7 +40,7 @@ public class IAdminManagement implements AdminManagement {
 
         }
         else {
-            System.out.println("Wrong admin username or password");
+            System.out.println("TOO MANY WRONG ATTEMPTS!");
             System.exit(-1);
         }
     }
